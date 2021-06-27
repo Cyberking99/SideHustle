@@ -1,0 +1,110 @@
+<?php
+/********************************************
+@Author: Kefas Kingsley Gbutemu
+
+@Task Title: Week 1 task for web design and development (backend)
+
+@Description: Write a range function that takes two arguments, start and end, and returns an array containing all the numbers from start up to (and including) end.
+              Next, write a sum function that takes an array of numbers and returns the sum of these numbers.
+              
+@Due Date: 2021-06-27
+
+@NOTE: Using "range" as a function name will throw a fata error - PHP Fatal error:  Cannot redeclare range() in ....
+********************************************/
+
+// creating range function
+function myrange($start, $end) {
+  
+  // create the result array
+  $result = array();
+  
+  // we set increment to 1
+  $increment = 1;
+  
+  // calculate the number of times to loop (this is because you might be going 
+  // up or down with your increment)
+  $numLoops = abs(($end - $start)/$increment) + 1 ;
+  
+  // loop that many times
+  for ($i = 0; $i < $numLoops; $i++) {
+  
+    // add (push) the value of start to the array
+  	array_push($result,$start);
+       
+    // increment the value of start
+    $start += $increment;
+  }
+  
+  // return the array with all the things in it
+  return $result;
+}
+
+// creating sum function
+function sum($numArray) {
+  // set a variable to hold the sum
+  $arrayTotal = 0;
+  
+  // see how many numbers are in the array
+  $numLoops = count($numArray);
+  
+  // loop that many times
+  for ($i = 0; $i < $numLoops; $i++) {
+    // add the number at that index to the sum
+    $arrayTotal += $numArray[$i];
+  }
+  // return the sum
+  return $arrayTotal;
+}
+
+// testing the program
+// testing range function
+// Using print_r because echo does not give output execpt it is being looped through the array
+echo "Range: Using print_r\n";
+print_r(myrange(1, 10));
+/*
+Output:
+Range: Using print_r
+Array
+(
+    [0] => 1
+    [1] => 2
+    [2] => 3
+    [3] => 4
+    [4] => 5
+    [5] => 6
+    [6] => 7
+    [7] => 8
+    [8] => 9
+    [9] => 10
+)
+*/
+
+// Lets try it with echo
+echo "\n\nRange: Using echo\n";
+$numbers = myrange(1, 10);
+foreach($numbers as $number){
+  echo $number."\n";
+}
+/*
+Output:
+Range: Using echo
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+*/
+
+// testing both range and sum function
+echo "\n\nSum:\n".sum(myrange(1, 10));
+/*
+Output:
+Sum:
+55
+*/
+?>
